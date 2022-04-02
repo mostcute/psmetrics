@@ -18,19 +18,19 @@ func Partitions(server string)[]psDisk.PartitionStat{
 	req, err := http.NewRequest(method, url, nil)
 
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return []psDisk.PartitionStat{}
 	}
 	res, err := client.Do(req)
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return []psDisk.PartitionStat{}
 	}
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return []psDisk.PartitionStat{}
 	}
 
@@ -50,20 +50,20 @@ func DiskUsage(server ,path string)psDisk.UsageStat{
 	req, err := http.NewRequest(method, url, nil)
 
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return psDisk.UsageStat{}
 	}
 	req.Header.Add("path",path)
 	res, err := client.Do(req)
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return psDisk.UsageStat{}
 	}
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return psDisk.UsageStat{}
 	}
 
@@ -84,20 +84,20 @@ func DiskIOCounters(server ,path string)map[string]psDisk.IOCountersStat{
 	req, err := http.NewRequest(method, url, nil)
 
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return result
 	}
 	req.Header.Add("path",path)
 	res, err := client.Do(req)
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return result
 	}
 	defer res.Body.Close()
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		return result
 	}
 
