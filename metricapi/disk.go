@@ -2,19 +2,18 @@ package metricapi
 
 import (
 	"encoding/json"
-	"fmt"
+
 	psDisk "github.com/shirou/gopsutil/disk"
 	"io/ioutil"
 	"net/http"
 )
 
-func Partitions(server string)[]psDisk.PartitionStat{
+func Partitions(server string) []psDisk.PartitionStat {
 
-	url := "http://"+server+"/metric/disk"
+	url := "http://" + server + "/metric/disk"
 	method := "GET"
 
-	client := &http.Client {
-	}
+	client := &http.Client{}
 	req, err := http.NewRequest(method, url, nil)
 
 	if err != nil {
@@ -35,25 +34,24 @@ func Partitions(server string)[]psDisk.PartitionStat{
 	}
 
 	var result []psDisk.PartitionStat
-	 json.Unmarshal(body,&result)
+	json.Unmarshal(body, &result)
 	return result
 
 }
 
-func DiskUsage(server ,path string)psDisk.UsageStat{
+func DiskUsage(server, path string) psDisk.UsageStat {
 
-	url := "http://"+server+"/metric/diskusage"
+	url := "http://" + server + "/metric/diskusage"
 	method := "GET"
 
-	client := &http.Client {
-	}
+	client := &http.Client{}
 	req, err := http.NewRequest(method, url, nil)
 
 	if err != nil {
 		//fmt.Println(err)
 		return psDisk.UsageStat{}
 	}
-	req.Header.Add("path",path)
+	req.Header.Add("path", path)
 	res, err := client.Do(req)
 	if err != nil {
 		//fmt.Println(err)
@@ -68,26 +66,24 @@ func DiskUsage(server ,path string)psDisk.UsageStat{
 	}
 
 	var result psDisk.UsageStat
-	json.Unmarshal(body,&result)
+	json.Unmarshal(body, &result)
 	return result
 
 }
 
+func DiskIOCounters(server, path string) map[string]psDisk.IOCountersStat {
 
-func DiskIOCounters(server ,path string)map[string]psDisk.IOCountersStat{
-
-	url := "http://"+server+"/metric/diskiocounter"
+	url := "http://" + server + "/metric/diskiocounter"
 	method := "GET"
 	result := make(map[string]psDisk.IOCountersStat)
-	client := &http.Client {
-	}
+	client := &http.Client{}
 	req, err := http.NewRequest(method, url, nil)
 
 	if err != nil {
 		//fmt.Println(err)
 		return result
 	}
-	req.Header.Add("path",path)
+	req.Header.Add("path", path)
 	res, err := client.Do(req)
 	if err != nil {
 		//fmt.Println(err)
@@ -101,8 +97,7 @@ func DiskIOCounters(server ,path string)map[string]psDisk.IOCountersStat{
 		return result
 	}
 
-
-	json.Unmarshal(body,&result)
+	json.Unmarshal(body, &result)
 	return result
 
 }
