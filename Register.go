@@ -1,10 +1,13 @@
 package psmetrics
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"log"
+)
 
 func Register(r *gin.Engine) {
 	metricsgroup := r.Group("/metric")
-
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
 	metricsgroup.GET("/disk", HandleDisk)
 	metricsgroup.GET("/diskusage", HandleDiskUsage)
 	metricsgroup.GET("/diskiocounter", HandleDiskIOCounter)
