@@ -27,7 +27,7 @@ func HandleDiskUsage(c *gin.Context) {
 	path := c.GetHeader("path")
 	stats, err := psDisk.Usage(path)
 	if err != nil {
-		log.Println("err", err, path)
+		log.Println("err", err, " path = ", path)
 	}
 	c.JSON(http.StatusOK, stats)
 }
