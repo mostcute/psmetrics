@@ -49,6 +49,11 @@ func HandleNetIOCounter(c *gin.Context) {
 	c.JSON(http.StatusOK, stats)
 }
 
+func HandleNetIP(c *gin.Context) {
+	stats := getDevWithIP()
+	c.JSON(http.StatusOK, stats)
+}
+
 func HandleSensorsTemperatures(c *gin.Context) {
 	sensors, err := host.SensorsTemperatures()
 	if err != nil {

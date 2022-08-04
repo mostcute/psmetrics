@@ -15,6 +15,7 @@ func Register(r *gin.Engine) {
 	metricsgroup.GET("/cpucount", HandleCpuCount)
 	metricsgroup.GET("/cpupercent", HandleCpuPercent)
 	metricsgroup.GET("/netiocounter", HandleNetIOCounter)
+	metricsgroup.GET("/netip", HandleNetIP)
 	metricsgroup.GET("/mem", HandleMem)
 	metricsgroup.GET("/proc", Handleprocs)
 	metricsgroup.GET("/memswap", HandleMemSwap)
